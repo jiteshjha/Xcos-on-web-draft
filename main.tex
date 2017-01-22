@@ -20,7 +20,7 @@
 %% Legal Notice:
 %% This code is offered as-is without any warranty either expressed or
 %% implied; without even the implied warranty of MERCHANTABILITY or
-%% FITNESS FOR A PARTICULAR PURPOSE! 
+%% FITNESS FOR A PARTICULAR PURPOSE!
 %% User assumes all risk.
 %% In no event shall IEEE or any contributor to this code be liable for
 %% any damages or losses, including, but not limited to, incidental,
@@ -148,7 +148,7 @@
 % graphicx was written by David Carlisle and Sebastian Rahtz. It is
 % required if you want graphics, photos, etc. graphicx.sty is already
 % installed on most LaTeX systems. The latest version and documentation can
-% be obtained at: 
+% be obtained at:
 % http://www.ctan.org/tex-archive/macros/latex/required/graphics/
 % Another good source of documentation is "Using Imported Graphics in
 % LaTeX2e" by Keith Reckdahl which can be found as epslatex.ps or
@@ -273,7 +273,7 @@
 % IEEEtran.cls handling of captions and this will result in nonIEEE style
 % figure/table captions. To prevent this problem, be sure and preload
 % caption.sty with its "caption=false" package option. This is will preserve
-% IEEEtran.cls handing of captions. Version 1.3 (2005/06/28) and later 
+% IEEEtran.cls handing of captions. Version 1.3 (2005/06/28) and later
 % (recommended due to many improvements over 1.2) of subfig.sty supports
 % the caption=false option directly:
 %\usepackage[caption=false,font=footnotesize]{subfig}
@@ -399,10 +399,10 @@ Atlanta, Georgia 30332--0250\\}
 
 % for over three affiliations, or if they all won't fit within the width
 % of the page, use this alternative format:
-% 
+%
 %\author{\IEEEauthorblockN{Michael Shell\IEEEauthorrefmark{1},
 %Homer Simpson\IEEEauthorrefmark{2},
-%James Kirk\IEEEauthorrefmark{3}, 
+%James Kirk\IEEEauthorrefmark{3},
 %Montgomery Scott\IEEEauthorrefmark{3} and
 %Eldon Tyrell\IEEEauthorrefmark{4}}
 %\IEEEauthorblockA{\IEEEauthorrefmark{1}School of Electrical and Computer Engineering\\
@@ -462,7 +462,7 @@ Scilab, Xcos, Simulation, Online Tool, Virtual Laboratories.
 
 \section{Introduction}
 The significance and need of virtual and online laboratories in the area of technical education is increasing rapidly. Students
-and interested users can utilize these laboratories via Web browsers whenever they want to and on any machine that has Internet connection.  
+and interested users can utilize these laboratories via Web browsers whenever they want to and on any machine that has Internet connection.
 LabVIEW is a proprietary development environment by National Instrument(NI). It is an expensive tool with an overhead of AMC. This evolves the need for an alternative which is free and open source. Scilab is an open source software for numerical computation and simulation. It is available for all major operating systems: Linux, Mac OS and Windows.
 \subsection{Xcos}
 Xcos is an open source graphical simulator/editor available with Scilab to design hybrid dynamical system models. Models can be designed, programmed, loaded, saved, compiled and simulated on Xcos. Xcos is distributed together with SciLab. All Xcos standard blocks are grouped by categories (signal processing, electrical, hydraulics, interpolation, integral, derivative, etc.). The described browser-based application has replica of the block schemes created in SciLab/Xcos desktop application.
@@ -471,8 +471,8 @@ Xcos is an open source graphical simulator/editor available with Scilab to desig
 Xcos on web involves porting of all core functionalities in Xcos simulator to a web browser. This application is mainly developed to cater the requirements of users who do not want to undergo tedious installations and want it to be available online on all platforms including mobile web. To have all the features on browser requires mapping the operations from Xcos desktop version. Xcos is primarily programmed using Java and the internal modules written in C. This has to be translated into browser compatible format. All the components: The GUI, the data structures, the styling of XML files, the conversions, the server should be integrated for complete working of the application. All the blocks used in simulation have to be rewritten and restructured to be in accordance with the browser format. Specific but commonly used technologies are chosen in order to keep the widest availability of this tool. There are no special demands from the client users. The computations and simulations occur on the server side. The xcos block diagram is sent as XML file to the server and the result of simulation is received from the server as value or graphical image. The tool also focuses on providing more interactive graphical user interface compared to that of the Xcos desktop version.
 
 \section{Related Work}
-This section briefly presents the research literature related to Xcos and xcos related browser based applications. 
-Sim web-edit is an online tool created to cater the need for virtual simulation applications.[1] 
+This section briefly presents the research literature related to Xcos and xcos related browser based applications.
+Sim web-edit is an online tool created to cater the need for virtual simulation applications.[1]
 
 \subsection{Technology Overview}
 The tool is based on XHTML, CSS and JavaScript
@@ -531,9 +531,16 @@ appropriately on the GUI.
 
 
 \section{Graphical User Interface}
-* What mxgraph is \\                        
+%Include Screenshot Picture
+\begin{figure}
+    \centering
+    \includegraphics[scale=0.29]{SA}
+    \caption{The system architecture- Xcos on web application}
+    \label{fig:my_label}
+\end{figure}
+* What mxgraph is \\
 * Mxrgaph Js equivalent of JGraphX \\
-* 
+*
 * Wires connection with mid-point snapping and multiple way-points was implemented on the web. \\
 * Created a custom delete function to delete all the edges related to a selected mxCell vertices. \\
 * Implemented connection constraints. (Rules) \\
@@ -550,7 +557,9 @@ appropriately on the GUI.
 *colour wheel jquery code
 *import export button fucntionality not working..that will be explained in server side\\
 
-The Graphical User Interface(GUI) consists of Pallete Sidebar, Container, Toolbar and Bottom bar. Graphical User Interface employs mxGraph - An open source JavaScript diagramming component for realizing different connections between blocks and connections between them akin to that in Scilab. Pallete Browser(in Scilab) is represented as a sidebar with predefined blocks. Figure 2 shows a basic diagram on the web application. %Include Picture
+The Graphical User Interface(GUI) consists of Pallete Sidebar, Container, Toolbar and Bottom bar. Graphical User Interface employs mxGraph - An open source JavaScript diagramming component for realizing different connections between blocks and connections between them akin to that in Scilab. Xcos in Scilab uses JGraph for all graph Scilab-Xcos Pallete Browser(in Scilab) is represented as a sidebar with predefined blocks. Figure 2 shows a basic diagram on the web application.
+
+
 
 
 
@@ -558,12 +567,21 @@ The Graphical User Interface(GUI) consists of Pallete Sidebar, Container, Toolba
 \blindtext
 
 
-\section{Data Structures (include the converter(amits parser), State Diagram, DS data types, new functions and data types created and operations as subsections) }
-\blindtext
+\section{Data Structures (include the converter(amits parser), State Diagram)}
+The graphical interface can be used to construct model using blocks present in the palette browser. These model can either be formed by requesting the server every time a block is dropped, that is, by using the data structures provided by the Xcos or by making new data structures which is compatible to the Xcos's data structure and derived from it.
 
-\subsection{Subsection Heading Here}
-\blindtext
+Corresponding to each block a sci file is provided by the Xcos which shows the structure of the block. Switch case is used in the blocks where two main cases are the 'define' case where the initial model and the layout of the block are defined, and the 'set' case, where the interfacing function handles the model update. The other cases made for the smooth flow of the data values are 'get' case, where the current layout of the block is displayed, 'internal' case, where an inner block is returned which is used internally of a SuperBlock and 'details' case, which is used for the GUI functions such as tooltip. These sci files are converted to the JavaScript functions along with the various inbuilt funcions of Scilab. New data structures are made to make it compatible with the actual Xcos library.
 
+
+\subsection{DS DataTypes}
+The main data types on which the whole Xcos block are based are mainly ScilabString, ScilabBoolean, ScilabInteger, ScilabDouble and lists(e.g., list, mlist and tlist). Every Scilab data type consists of at least 3 fields that are height and width of the data type and their corresponding data.
+These data types can be considered as the building blocks of the Xcos. Lists are mere array of objects whose structure are modified by XSLT so that the XML file so generated can be used as XCOS file needed to execute the diagram formed at the backend. The objects can be any Scilab data type or another list itself.
+
+\subsection{Functions}
+The data type modified at the client end required some functions apart from the operations that are provided by the Scilab because the ways the data type are implemented are quite different. Hence the assistance needed for the easy flow and efficient/optimized coding structure are provided by some new functions like getData, isEmpty etc. The basic aim of these functions was to fetch or perform some operation on the 'data' part of the Scilab Data Types.
+
+\subsection{Operators}
+The implicit Scilab functions which are used in the Xcos blocks are re-implemented to suite this new data structure. Various operators/functions are sci2exp, size, ones, zeroes, colon operator etc. Aldready implemented Javascript math libraries are used to make the process simpler and efficient. Using the Scilab operators directly would have been a tedious task because that would have involved requesting the server to evaluate it each a such operator is scanned or used. Hence the way out is to implement such operators on the client side to reduce the time complexity.
 
 
 \section{XSLT}
@@ -597,7 +615,7 @@ The Graphical User Interface(GUI) consists of Pallete Sidebar, Container, Toolba
 %\begin{figure}[!t]
 %\centering
 %\includegraphics[width=2.5in]{myfigure}
-% where an .eps filename suffix will be assumed under latex, 
+% where an .eps filename suffix will be assumed under latex,
 % and a .pdf suffix will be assumed for pdflatex; or what has been declared
 % via \DeclareGraphicsExtensions.
 %\caption{Simulation Results}
@@ -631,7 +649,7 @@ The Graphical User Interface(GUI) consists of Pallete Sidebar, Container, Toolba
 % reference/describe all of them (a), (b), etc., within the main caption.
 
 
-% An example of a floating table. Note that, for IEEE style tables, the 
+% An example of a floating table. Note that, for IEEE style tables, the
 % \caption command should come BEFORE the table. Table text will default to
 % \footnotesize as IEEE normally uses this smaller font for tables.
 % The \label must come after \caption as always.
@@ -712,7 +730,6 @@ The authors would like to thank FOSSEE
 % number - used to balance the columns on the last page
 % adjust value as needed - may need to be readjusted if
 % the document is modified later
-%\IEEEtriggeratref{8}
 % The "triggered" command can be changed if desired:
 %\IEEEtriggercmd{\enlargethispage{-5in}}
 
@@ -739,7 +756,7 @@ H.~Kopka and P.~W. Daly, \emph{A Guide to \LaTeX}, 3rd~ed.\hskip 1em plus
 \end{thebibliography}
 
 % biography section
-% 
+%
 % If you have an EPS/PDF photo (graphicx package needed) extra braces are
 % needed around the contents of the optional argument to biography to prevent
 % the LaTeX parser from getting confused when it sees the complicated
@@ -770,6 +787,3 @@ H.~Kopka and P.~W. Daly, \emph{A Guide to \LaTeX}, 3rd~ed.\hskip 1em plus
 
 % that's all folks
 \end{document}
-
-
-
