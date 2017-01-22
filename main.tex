@@ -64,7 +64,7 @@
 % draft mode.
 %
 \documentclass[conference]{IEEEtran}
-\usepackage{blindtext, graphicx}
+\usepackage{blindtext, graphicx, tabu}
 % Add the compsoc option for Computer Society conferences.
 %
 % If IEEEtran.cls has not been installed into the LaTeX system files,
@@ -379,16 +379,11 @@ School of Electrical and\\Computer Engineering\\
 Georgia Institute of Technology\\
 Atlanta, Georgia 30332--0250\\}
 \and
-\IEEEauthorblockN{James Kirk\\ and Montgomery Scott}
-\IEEEauthorblockA{Starfleet Academy\\
-San Francisco, California 96678-2391\\
-Telephone: (800) 555--1212\\
-Fax: (888) 555--1212\\\\
-\IEEEauthorblockN{Michael Shell}
-School of Electrical and\\Computer Engineering\\
-Georgia Institute of Technology\\
-Atlanta, Georgia 30332--0250\\}
-}
+\IEEEauthorblockN{Jitesh Kumar Jha}
+\IEEEauthorblockA{Department of Comptuter Science\\ \& Engineering\\
+Manipal Institute of Technology\\
+Manipal, Karnataka, India 576104\\
+Email: jitesh.kumar2@learner.manipal.edu}}
 
 
 
@@ -538,33 +533,91 @@ appropriately on the GUI.
     \caption{The system architecture- Xcos on web application}
     \label{fig:my_label}
 \end{figure}
-* What mxgraph is \\
-* Mxrgaph Js equivalent of JGraphX \\
+\iffalse
+* --What mxgraph is \\
+* --Mxrgaph Js equivalent of JGraphX \\
 *
-* Wires connection with mid-point snapping and multiple way-points was implemented on the web. \\
+* --Wires connection with mid-point snapping and multiple way-points was implemented on the web. \\
 * Created a custom delete function to delete all the edges related to a selected mxCell vertices. \\
-* Implemented connection constraints. (Rules) \\
+* --Implemented connection constraints. (Rules) \\
 * Rotate, mirror function \\
 * Completed the 'link function' -- Each recently created link in the web application can now be styled depending on the source of each link and a 'name' attribute has been set to uniquely identify each type of link. \\
 * edges - text label, label font family, label font size, label text color
-* Split-block is now displayed over it's immediate associated edges. \\
-* Tooltip \\
-*port constraints and rules\\
-*right side frame on editor\\
+* --Split-block is now displayed over it's immediate associated edges. \\
+* --Tooltip \\
+* --port constraints and rules\\
+* --right side frame on editor\\
 *zoom, print, redo, undo etx\\
 *right click functionality(all)\\
 *how the details were mapped with data structures\\
 *colour wheel jquery code
 *import export button fucntionality not working..that will be explained in server side\\
+\fi
 
-The Graphical User Interface(GUI) consists of Pallete Sidebar, Container, Toolbar and Bottom bar. Graphical User Interface employs mxGraph - An open source JavaScript diagramming component for realizing different connections between blocks and connections between them akin to that in Scilab. Xcos in Scilab uses JGraph for all graph Scilab-Xcos Pallete Browser(in Scilab) is represented as a sidebar with predefined blocks. Figure 2 shows a basic diagram on the web application.
+The Graphical User Interface(GUI) of xcos-on-web consists of Pallete Sidebar, Graph Container, Toolbar and Bottom bar. Graphical User Interface employs mxGraph - An open source JavaScript diagramming component for realizing different connections between blocks akin to that in Scilab-Xcos. mxGraph is the Javascript variant of Jgraph, which is used for all graph visualization in Scilab-xcos. Scilab-Xcos Pallete Browser(in Scilab) is represented as a sidebar with predefined blocks. Figure 2 shows a basic diagram on the web application.
 
+\subsection{Pallete Sidebar}
 
+Each predefined block consists of a set of explicit input port, explicit output port, implicit input port, implicit output port, control port and command port, data structure and a SVG image. When the Pallete sidebar is created, each block is created in series in accordance to the design of the block. The designs of all the predefined block are contained in a XML file, which is loaded once the Pallete sidebar is created. According to the design of every block, the corresponding ports, data structure and SVG image is created.
 
+\subsection{Graph Container}
 
+The container of xcos-on-web is the area of the front-end where different graphical layouts of blocks and connections could be made. Every entity(Blocks, connections) are represented as Javascript Objects. Any predefined block on the pallete sidebar are draggable onto the container. All blocks on the container are selectable, draggable and re-sizable. Connections can only initiate from a port attached to a block, connections from any point on the block are disabled.
 
-\subsection{Subsection Heading Here}
-\blindtext
+Every block as an associated Tooltip. A tooltip is a pop-up box that appears when the user moves the mouse pointer. The tooltip of a block consists of key-value pair of data derived from the data structure of that block. These key-value pair shows the attributes of the block. These attributes include Block Name, Simulation
+UID(Unique ID), different style attributes and types and number of ports.
+
+The container extends beyond the limits of the available screen, enabling expandable diagrams. On the top-right corner of the container, a small window is situated which shows the position of the current view of the container inside a blue frame with respect to the entire container. The blue frame inside this window could be moved around the entire container to change user's current view.
+
+\subsection{Connection}
+
+A connection between two blocks(also called as a 'wire') is an orthogonal link between ports of the two blocks. A connection can be designated as an implicit link, an explicit link or a command-control link depending upon the source port and destination port of the link as shown:
+
+\begin{center}
+\begin{tabu} to 0.4\textwidth { | X[c] | X[c] | X[c] | }
+ \hline
+ Source & Destination & Type of\\ [0.5ex]
+ Port & Port & Connection\\ [0.5ex]
+ \hline\hline
+ Explicit Output Port & Explicit Input Port & Explicit Link \\
+ \hline
+ Implicit Output Port & Implicit Input Port & Implicit Link \\
+ \hline
+ Command Port & Control Port & Command-Control Link  \\
+ \hline
+\end{tabu}
+\end{center}
+
+When the user clicks on a port of a block and drags the mouse pointer, a connection or wire is created in the preview stage. As the user drags the mouse pointer, waypoints on the container are created and a wire is constantly created by adding new waypoints to the previous waypoints.
+The preview stage ends when the user snaps the mouse pointer onto the destination port with final waypoint(on the destination port) is added to the wire, thus exiting the preview stage.
+
+The style of the connection in Xcos-on-web inherits the "wireEdgeStyle" provided by mxGraph library. "wireEdgeStyle" ensures connections at right angles with each other(orthogonal connections) and enables highlighting of the connection.
+
+\subsection{Port Constraints}
+Permissible connections are enforced with port constraints(For instance, a connection with source as Implicit Output Port and the destination as Explicit Input Port is not allowed). Port constraints are implemented by detecting the source and destination of a connection while the connection is in the preview stage(or,before the connection is created). If the connection violates the port constraints, that connection is discarded and the user is cautioned about the violation of port constraints.
+
+\subsection{Split Block}
+%Include Split Block Picture
+\begin{figure}
+    \centering
+    \includegraphics[scale=0.29]{SA}
+    \caption{The system architecture- Xcos on web application}
+    \label{fig:my_label}
+\end{figure}
+When the source of a new connection(say, Connection 1) is another connection(say, Connection 2), a Split Block is introduced as a source of Connection 1 on the mid-point of Connection 2. A Split Block cuts the connection 2 into two pieces, and serves as a intermediate node for the two pieces of connection 2 and connection 1. A split block is like any other block, but it doesn't serve any computational purpose when the output of a diagram is produced by the Scilab engine. A split block consists of three ports, two implicit/explicit/ output(or command) ports and two implicit/explicit input(or control) port depending on the type of link.
+
+In Xcos-on-web, when the above event occurs, the mid-point of connection 2 is analyzed by retrieving the first waypoint of Connection 2 and a split-block is introduced at the retrieved waypoint. The destination of Connection 2 is set to the input(or command) port of the split-block, depending on the type of Connection 2. A new connection(say, Connection 3) with type as similar to Connection 2 is introduced with source as the output(or control) port of the split-block and the destination as the original destination port of Connection 2. The destination port of Connection 2 is changed to the input(or control) port of the split-block, thereby resulting into two connections. The original waypoints of Connection 2 are divided into two sets, with the dividing point in the original set of waypoints closest to the coordinates of split-block. The first set of waypoints gives the new structure of Connection 2, while the second set of waypoints gives the structure to Connection 3.
+
+For the source port and destination ports of Connection 1, there exists two cases:
+
+\begin{enumerate}
+  \item If the source of Connection 1 is a port of a block and the destination of Connection 1 is another connection(Connection 2), then the new destination port for Connection 1 is the output(or command) port of the split-block.
+
+  \item If the source of Connection 1 is another connection(Connection 2) and  and the destination of Connection 1 is a port of a block, then the new source port for Connection 1 is the output(or command) port of the split-block.
+
+\end{enumerate}
+
+\subsection{Delete Function}
 
 
 \section{Data Structures (include the converter(amits parser), State Diagram)}
