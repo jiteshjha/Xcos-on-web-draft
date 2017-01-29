@@ -64,7 +64,11 @@
 % draft mode.
 %
 \documentclass[conference]{IEEEtran}
-\usepackage{blindtext, graphicx, tabu}
+\usepackage{blindtext, graphicx, tabu, listings}
+\lstset{
+    frame=single,
+    breaklines=true,
+}
 % Add the compsoc option for Computer Society conferences.
 %
 % If IEEEtran.cls has not been installed into the LaTeX system files,
@@ -359,32 +363,52 @@
 % author names and affiliations
 % use a multiple column layout for up to three different
 % affiliations
-\author{\IEEEauthorblockN{Michael Shell}
+\author{
+\IEEEauthorblockN{Michael Shell}
 \IEEEauthorblockA{School of Electrical and\\Computer Engineering\\
 Georgia Institute of Technology\\
 Atlanta, Georgia 30332--0250\\
-Email: http://www.michaelshell.org\\\\
-\IEEEauthorblockN{Michael Shell}
-School of Electrical and\\Computer Engineering\\
-Georgia Institute of Technology\\
-Atlanta, Georgia 30332--0250\\
-Email: http://www.michaelshell.org}
+Email: http://www.michaelshell.org/contact.html}
 \and
 \IEEEauthorblockN{Homer Simpson}
 \IEEEauthorblockA{Twentieth Century Fox\\
 Springfield, USA\\
-Email: homer@thesimpsons.com\\\\
-\IEEEauthorblockN{Michael Shell}
-School of Electrical and\\Computer Engineering\\
-Georgia Institute of Technology\\
-Atlanta, Georgia 30332--0250\\}
+Email: homer@thesimpsons.com}
 \and
-\IEEEauthorblockN{Jitesh Kumar Jha}
-\IEEEauthorblockA{Department of Comptuter Science\\ \& Engineering\\
-Manipal Institute of Technology\\
-Manipal, Karnataka, India 576104\\
-Email: jitesh.kumar2@learner.manipal.edu}}
-
+\IEEEauthorblockN{James Kirk\\ and Montgomery Scott}
+\IEEEauthorblockA{Starfleet Academy\\
+San Francisco, California 96678-2391\\
+Telephone: (800) 555--1212\\
+Fax: (888) 555--1212}
+\and
+\IEEEauthorblockN{Michael Shell}
+\IEEEauthorblockA{School of Electrical and\\Computer Engineering\\
+Georgia Institute of Technology\\
+Atlanta, Georgia 30332--0250\\
+Email: http://www.michaelshell.org/contact.html}
+\and
+\IEEEauthorblockN{Homer Simpson}
+\IEEEauthorblockA{Twentieth Century Fox\\
+Springfield, USA\\
+Email: homer@thesimpsons.com}
+\and
+\IEEEauthorblockN{James Kirk\\ and Montgomery Scott}
+\IEEEauthorblockA{Starfleet Academy\\
+San Francisco, California 96678-2391\\
+Telephone: (800) 555--1212\\
+Fax: (888) 555--1212}}
+%\IEEEauthorblockN{Nimish Singhal}
+%\IEEEauthorblockA{Department of Information \& Communication\\ Technology\\
+%Manipal Institute of Technology\\
+%Manipal, Karnataka, India 576104\\
+%Email: nimish.singhal@learner.manipal.edu\\}
+%\and
+%\IEEEauthorblockN{Jitesh Kumar Jha}
+%\IEEEauthorblockA{Department of Comptuter Science\\ \& Engineering\\
+%Manipal Institute of Technology\\
+%Manipal, Karnataka, India 576104\\
+%Email: jitesh.kumar2@learner.manipal.edu}}
+%
 
 
 % conference papers do not typically use \thanks and this command
@@ -467,7 +491,7 @@ Xcos on web involves porting of all core functionalities in Xcos simulator to a 
 
 \section{Related Work}
 This section briefly presents the research literature related to Xcos and xcos related browser based applications. 
-Sim web-edit is an online tool created to cater the need for virtual simulation applications.[1] 
+Sim web-edit is an online tool created to cater the need for virtual simulation applications.[1] Following describing its technology and configuration.
 
 \subsection{Technology Overview}
 The tool is based on XHTML, CSS and JavaScript
@@ -479,7 +503,7 @@ object manipulation, changing CSS 2 properties, visual
 functions and AJAX requests. The application internally operates with XML and JSON 3 formats. Therefore the support of XML and JSON handling
 functions are required. In fact, these functions are natively
 supported by PHP version 5.2 or higher, thus it is the only
-requirement to the web server. [1]
+requirement to the web server. [1] The Xcos on web tool technology stack- mxGraph, XSLT, JavaScript, Python, Java Servlet, NGINX and Apache Tomcat.
 
 \subsection{Configuration}
 The key part of application is the common configuration file
@@ -498,7 +522,7 @@ file by the application administrator. It is not necessary to edit
 source codes of the application. New blocks can be easily
 added by modifying configuration XML file. Currently, the
 web editor includes the most common blocks used in Xcos
-block schemes.[1]
+block schemes.[1] The Xcos on web tool developed incorporates all the blocks present originally.
 
 \section{System Architecture}
 \begin{figure}
@@ -522,15 +546,15 @@ The server has a Java servlet which calls the Scilab engine with
 proper parameters and the received XML. The simulation is
 performed and result is sent back to the server which is then displayed
 appropriately on the GUI.
-
+The system flow: Start server--\textgreater Display page with various simulation blocks --\textgreater Make diagram --\textgreater Create mxGraph XML --\textgreater Create Xcos --\textgreater Send to server --\textgreater Simulate diagram --\textgreater Display result.
 
 
 \section{Graphical User Interface}
 %Include Screenshot Picture
 \begin{figure}
     \centering
-    \includegraphics[scale=0.29]{SA}
-    \caption{The system architecture- Xcos on web application}
+    \includegraphics[scale=0.18, trim={0 0 0 5cm},clip]{gui}
+    \caption{Xcos on web- Graphical user interface}
     \label{fig:my_label}
 \end{figure}
 \iffalse
@@ -574,10 +598,10 @@ The container extends beyond the limits of the available screen, enabling expand
 A connection between two blocks(also called as a 'wire') is an orthogonal link between ports of the two blocks. A connection can be designated as an implicit link, an explicit link or a command-control link depending upon the source port and destination port of the link as shown:
 
 \begin{center}
-\begin{tabu} to 0.4\textwidth { | X[c] | X[c] | X[c] | }
+\begin{tabu} to 0.48\textwidth { | X[c] | X[c] | X[c] | }
  \hline
- Source & Destination & Type of\\ [0.5ex]
- Port & Port & Connection\\ [0.5ex]
+ Source Port & Destination Port & Type of Link\\ [0.40ex]
+
  \hline\hline
  Explicit Output Port & Explicit Input Port & Explicit Link \\ 
  \hline
@@ -624,7 +648,7 @@ A diagram consisting of blocks and connections form a graph. On selection and de
 The delete function also maintains the integrity of connections involving split-block.
 On deletion of any outgoing connection, that connection along with the split-block gets deleted, while the other two connections are combined to form one single connections. The combination of two connections is performed by adding the total waypoints of the two connections to the first connection, changing the destination of the first connection to that of the second connection, and finally deleting the second connection.
 
-\section{Data Structures (include the converter(amits parser), State Diagram)}
+\section{Data Structures}
 The graphical interface can be used to construct model using blocks present in the palette browser. These model can either be formed by requesting the server every time a block is dropped, that is, by using the data structures provided by the Xcos or by making new data structures which is compatible to the Xcos's data structure and derived from it. 
 
 Corresponding to each block a sci file is provided by the Xcos which shows the structure of the block. Switch case is used in the blocks where two main cases are the 'define' case where the initial model and the layout of the block are defined, and the 'set' case, where the interfacing function handles the model update. The other cases made for the smooth flow of the data values are 'get' case, where the current layout of the block is displayed, 'internal' case, where an inner block is returned which is used internally of a SuperBlock and 'details' case, which is used for the GUI functions such as tooltip. These sci files are converted to the JavaScript functions along with the various inbuilt funcions of Scilab. New data structures are made to make it compatible with the actual Xcos library.
@@ -638,17 +662,82 @@ These data types can be considered as the building blocks of the Xcos. Lists are
 The data type modified at the client end required some functions apart from the operations that are provided by the Scilab because the ways the data type are implemented are quite different. Hence the assistance needed for the easy flow and efficient/optimized coding structure are provided by some new functions like getData, isEmpty etc. The basic aim of these functions was to fetch or perform some operation on the 'data' part of the Scilab Data Types.
 
 \subsection{Operators}
-The implicit Scilab functions which are used in the Xcos blocks are re-implemented to suite this new data structure. Various operators/functions are sci2exp, size, ones, zeroes, colon operator etc. Aldready implemented Javascript math libraries are used to make the process simpler and efficient. Using the Scilab operators directly would have been a tedious task because that would have involved requesting the server to evaluate it each a such operator is scanned or used. Hence the way out is to implement such operators on the client side to reduce the time complexity.
+The implicit Scilab functions which are used in the Xcos blocks are re-implemented to suit this new data structure. Various operators/functions are sci2exp, size, ones, zeroes, colon operator etc. Already implemented Javascript math libraries are used to make the process simpler and efficient. Using the Scilab operators directly would have been a tedious task because that would have involved requesting the server to evaluate it each a such operator is scanned or used. Hence, the way out is to implement such operators on the client side to reduce the time complexity.
+
+\subsection{Parser}
+\begin{figure}
+    \centering
+    \includegraphics[scale=0.29]{statediagram}
+    \caption{State Diagram for Parser}
+    \label{fig:my_label}
+\end{figure}
+There is a need to convert the data structures to JavaScript. But conversion by hand is tedious, inefficient and irritating. Solution is to build a simple engine to parse Scilab's data structures into equivalent JavaScript. It exhaustively searches for all the .sci files in Scilab repository which are the block files in xcos's palette, removing comments and extracting the 'define' code from file. After the preprocessing, '=' is used as a token to split the content of each line and categorize them to the correct data type or data structure. There are several edge cases like standard functions, lists that are taken care by the $\epsilon$ case.
+
+\begin{lstlisting}[language=Scilab, caption=ANDLOG.sci file]
+function [x,y,typ]=ANDLOG_f(job,arg1,arg2)
+    x=[];
+    y=[];
+    typ=[];
+    select job
+    case "set" then
+        x=arg1;
+    case "define" then
+        model=scicos_model()
+        model.sim="andlog"
+        model.out=1
+        model.evtin=[1;1]
+        model.blocktype="d"
+        model.firing=[]
+        model.dep_ut=[%f %f]
+
+        gr_i=[]
+        x=standard_define([3 3],model,[],gr_i)
+    end
+endfunction
+
+\end{lstlisting}
+
+\begin{lstlisting}[language=VBScript, caption=ANDLOG.js file]
+ANDLOG_f.prototype.define = function ANDLOG_f() {
+        var model = scicos_model();
+        model.sim = new ScilabString(["andlog"]);
+        model.out = new ScilabDouble([1]);
+        model.out2 = new ScilabDouble([1]); // null -> 1
+        model.evtin = new ScilabDouble([-1], [-1]); 
+        model.blocktype = new ScilabString(["d"]);
+        model.firing = new ScilabDouble();
+        model.dep_ut = new ScilabBoolean([false, false]);
+
+        var gr_i = new ScilabString(["xstringb(orig(1),orig(2),\"ANDLOG_f\",sz(1),sz(2));"]);
+        this.x = new standard_define(new ScilabDouble([80, 80]), model, new ScilabDouble(), gr_i); 
+        this.x.graphics.out_implicit = new ScilabString(["E"]);
+        this.x.graphics.out_label = new ScilabString([""]);
+        this.x.graphics.out_style = new ScilabString(["ExplicitOutputPort;align=right;verticalAlign=middle;spacing=10.0;rotation=0"]);
+        this.x.graphics.style = new ScilabString(["ANDLOG_f"]);
+        return new BasicBlock(this.x);
+    }
+
+\end{lstlisting}
 
 
 \section{XSLT}
-\blindtext
+After the major job of converting the data structures in Javascript was done, we were able to get the JS equivalent files for all the individual Scilab blocks. But when these blocks were connected together to make a graph, Scilab was unable to recognize the diagram. The reason behind this was that when a graph is made, Scilab automatically adds some metadata to it, which is used by the simulation engine. Also, the .xcos file that is generated by Xcos has no unnecessary attributes for the main tags. These empty values could be removed using Javascript but a better alternative was to use XSL translation. Using XSLT, the metadata was added to the header tags, unnecessary tags were eliminated, empty & unnecessary attributes were removed from the intermediate tags, default values were provided to the involved blocks and the entire XML was converted into a format understandable by Xcos by making minor but numerous changes. At many places the tag names needed to be renamed to the actual block names as well. XSL rules were given for each of the blocks using the definition file (.xsd) for .xcos files and these rules were applied to the XML created for the Javascript blocks before sending them to the server. This way, the server received a replica of the original .xcos file which would have been generated had the graph been made on Xcos. 
 
-\subsection{Subsection Heading Here}
-\blindtext
+On the client side, provisions were made so that the user can directly upload a .xcos file and get the
+result from the server. To get the graph created on the browser window, the .xcos file need to be converted into the Javascript equivalent XML. For this, the Xcos file was traversed three times. During the first traversal all the blocks were added to the browser window. The ports on these blocks were rendered during the second traversal and the last traversal took care of the corresponding links between all the ports. When mxGraph converts the graph into XML, it assigns new IDs to it. Therefore, a mechanism was used to keep track of the old and the new IDs.This entire process of reverse-engineering was done using only Javascript. 
+
 
 \section{Server Components (include java servlet, AJAX code on GUI side), xcos API( instance, executing), export, import}
-\blindtext
+Scilab can be used in both GUI and CLI mode. The console mode can be invoked using external applications with various available options. The entire application is being hosted using Apache Tomcat server. When the created image is sent to the server a Java servlet is run which, in turn, invokes Scilab-CLI and passes the .xcos file sent over the network. The simulation is performed and the result is saved as a .png file which is then sent back to the client.
+    On the client side, after the graph is created by the user, corresponding Xcos file is generated and 
+then sent over to the server using a AJAX request. The response from the server, which is a .png file is then displayed on to the browser window. 
+    
+\begin{figure}
+    \centering
+    \includegraphics[scale=0.18, trim={0 0 0 5cm},clip]{serveroutput}
+    \caption{The simulation result from server side}
+    \label{fig:my_label}
+\end{figure}
 
 \subsection{Subsection Heading Here}
 \blindtext
